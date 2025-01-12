@@ -1,0 +1,133 @@
+---
+- Infrastructure:
+    - Proxmox:
+        href: https://192.168.50.20:8006
+        icon: si-proxmox-#E57000
+        description: prx-prod-1 on blu-server
+        siteMonitor: https://192.168.50.20:8006
+        widget:
+            type: proxmox
+            url: https://192.168.50.20:8006
+            username: {{HOMEPAGE_VAR_PROXMOX_USERNAME}}
+            password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+    - Open Media Vault:
+        href: https://omv.rfl.sh
+        icon: si-openmediavault-#5DACDF
+        description: nas-prod-1 on org-server-1
+        siteMonitor: https://omv.rfl.sh
+        widget:
+            type: openmediavault
+            url: https://omv.rfl.sh
+            username: {{HOMEPAGE_VAR_OMV_USERNAME}}
+            password: {{HOMEPAGE_VAR_OMV_PASSWORD}}
+            method: services.getStatus # required
+    - Ngnix Proxy Manager:
+        href: http://192.168.50.10:40081
+        icon: si-nginxproxymanager-#F15833
+        description: npm-prod-1 on org-server-1
+        widget:
+            type: npm
+            url: http://192.168.50.10:40081
+            username: {{HOMEPAGE_VAR_NPM_USERNAME}}
+            password: {{HOMEPAGE_VAR_NPM_PASSWORD}}
+
+- Management:
+    - Portainer 1:
+        href: https://portainer-local.rfl.sh
+        icon: si-portainer-#E57000
+        description: portainer-business on org-server-1
+        widget:
+            type: portainer
+            url: https://portainer-local.rfl.sh
+            env: 2
+            key: {{HOMEPAGE_VAR_PORTAINER1_KEY}}
+    - Portainer 2:
+        href: https://192.168.50.25:9443
+        icon: si-portainer-#13BEF9
+        description: portainer on blu-server
+        widget:
+            type: portainer
+            url: https://192.168.50.25:9443
+            env: 2
+            key: {{HOMEPAGE_VAR_PORTAINER2_KEY}}
+    - Pi-Hole:
+        href: http://192.168.50.15/admin
+        icon: si-pihole-#96060C
+        description: pihole on blu-server
+        siteMonitor: http://192.168.50.15
+        widget:
+            type: pihole
+            url: http://192.168.50.15
+            key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
+
+- Networking:
+    - Omada Controller:
+        href: https://192.168.10.2
+        icon: si-omadacloud-#10C1D0
+        description: omada-prod-1
+        siteMonitor: https://192.168.10.2
+        widget:
+            type: omada
+            url: https://192.168.10.2
+            username: {{HOMEPAGE_VAR_OMADA_USERNAME}}
+            password: {{HOMEPAGE_VAR_OMADA_PASSWORD}}
+            site: RaNa
+
+- Monitoring:
+    - UptimeKuma:
+        href: https://wtf.rfl.sh
+        description: wtf-prod-1 on org-server-1
+        icon: si-uptimekuma-#5CDD8B
+        siteMonitor: https://wtf.rfl.sh
+        widget:
+            type: uptimekuma
+            url: https://wtf.rfl.sh
+            slug: homelab
+    # - Prometheus:
+    #     href: https://prometheus-prod-1.srv-prod-1.home.clcreative.de
+    #     description: prometheus-prod-1 on blu-server
+    #     icon: si-prometheus
+    #     server: srv-prod-1
+    #     container: prometheus-prod-1
+    #     widget:
+    #         type: prometheus
+    #         url: https://prometheus-prod-1.srv-prod-1.home.clcreative.de
+    # - Grafana:
+    #     href: https://grafana-prod-1.srv-prod-1.home.clcreative.de
+    #     description: grafana-prod-1 on blu-server
+    #     icon: si-grafana
+    #     server: srv-prod-1
+    #     container: grafana-prod-1
+
+- IoT and Smarthome:
+    - Home Assistant:
+        href: https://homeassistant-prod-1.srv-prod-7.home.clcreative.de
+        icon: si-homeassistant-#18BCF2
+        description: homeassistant-prod-1 on blu-server
+#         widget:
+#             type: homeassistant
+#             url: https://homeassistant-prod-1.srv-prod-7.home.clcreative.de
+#             key: {{HOMEPAGE_VAR_HOMEASSISTANT_KEY}}
+#             custom:
+
+- Apps:
+    - Immich:
+        href: https://photos.rfl.sh
+        description: immich-prod-1 on org-server-1
+        icon: si-immich-#4250AF
+        siteMonitor: https://photos.rfl.sh
+        widget:
+           type: immich
+           url: https://photos.rfl.sh
+           key: {{HOMEPAGE_VAR_IMMICH_KEY}}
+           version: 2
+    - NextCloud:
+        href: https://nextcloud.rfl.sh
+        description: nxt-prod-1 on org-server-1
+        icon: si-nextcloud-#0082C9
+        siteMonitor: https://nextcloud.rfl.sh
+        widget:
+            type: nextcloud
+            url: https://nextcloud.rfl.sh
+            username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
+            password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
