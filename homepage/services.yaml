@@ -65,13 +65,6 @@
         href: https://192.168.10.2
         icon: si-omadacloud-#10C1D0
         description: omada-prod-1
-        siteMonitor: https://192.168.10.2
-        widget:
-            type: omada
-            url: https://192.168.10.2
-            username: {{HOMEPAGE_VAR_OMADA_USERNAME}}
-            password: {{HOMEPAGE_VAR_OMADA_PASSWORD}}
-            site: RaNa
 
 - Monitoring:
     - UptimeKuma:
@@ -101,14 +94,13 @@
 
 - IoT and Smarthome:
     - Home Assistant:
-        href: https://homeassistant-prod-1.srv-prod-7.home.clcreative.de
+        href: http://192.168.50.25:8123
         icon: si-homeassistant-#18BCF2
         description: homeassistant-prod-1 on blu-server
-#         widget:
-#             type: homeassistant
-#             url: https://homeassistant-prod-1.srv-prod-7.home.clcreative.de
-#             key: {{HOMEPAGE_VAR_HOMEASSISTANT_KEY}}
-#             custom:
+        widget:
+           type: homeassistant
+           url: http://192.168.50.25:8123
+           key: {{HOMEPAGE_VAR_HOMEASSISTANT_KEY}}
 
 - Apps:
     - Immich:
@@ -131,3 +123,12 @@
             url: https://nextcloud.rfl.sh
             username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
             password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+    - SpeedTracker:
+        href: https://speedtest.rfl.sh
+        description: speed-prod-1 on blue
+        icon: si-speedtest-#0082C9
+        siteMonitor: https://speedtest.rfl.sh
+        widget:
+            type: speedtest
+            url: https://speedtest.rfl.sh
+            bitratePrecision: 3

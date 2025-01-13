@@ -1,0 +1,18 @@
+networks:
+  backend:
+    external: true
+    
+services:
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    container_name: nginxpm
+    ports:
+      - '40080:80'
+      - '40081:81'
+      - '40443:443'
+    volumes:
+      - /appdata/nginxproxy/data:/data
+      - /appdata/nginxproxy/letsencrypt:/etc/letsencrypt
+    networks:
+      - backend

@@ -1,0 +1,50 @@
+networks:
+  backend:
+    external: true
+  frontend:
+    external: true
+
+
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    networks: 
+      - backend
+      - frontend
+    ports:
+      - 8081:80
+    depends_on:
+      - mariadb
+
+    environment:
+      - PUID=995 # The user ids. Most likely both should be 1000. Incorrectly setting these will led to file permission issues
+      - PGID=100 # Set these to whatever your user is.
+      - TZ=America/Sao_Paulo # Set this to your timezone
+      - MYSQL_DATABASE=$DB_NAME # This is the database information we will set up in the next section
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$NEXTCLOUD_PW
+      - MYSQL_HOST=mariadb
+      - REDIS_HOST=redis # The redis container to use
+    volumes:
+      - /appdata/nextcloud/config:/config
+      - /appdata/nextcloud/data:/data
+  
+  mariadb:
+    image: mariadb
+    container_name: mariadb 
+    restart: unless-stopped 
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW # I honestly cant remember. If you know why let me know.
+    networks: 
+      - backend
+    volumes:
+      - /appdata/mariadb/nextcloud:/var/lib/mysql
+    environment:
+      - PUID=995 # Should be the same as the other containers
+      - PGID=100
+      - TZ=America/Sao_Paulo
+      - MYSQL_ROOT_PASSWORD=$ROOT_PW
+      - MYSQL_PASSWORD=$NEXTCLOUD_PW # Same information that was entered in the nextcloud portion
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_USER=$DB_USER
