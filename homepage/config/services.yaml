@@ -85,12 +85,18 @@
     #     widget:
     #         type: prometheus
     #         url: https://prometheus-prod-1.srv-prod-1.home.clcreative.de
-    # - Grafana:
-    #     href: https://grafana-prod-1.srv-prod-1.home.clcreative.de
-    #     description: grafana-prod-1 on blu-server
-    #     icon: si-grafana
-    #     server: srv-prod-1
-    #     container: grafana-prod-1
+    - Grafana:
+        href: https://grafana.rfl.sh
+        description: grafana-prod-1 on blu-server
+        icon: si-grafana-#F46800
+        server: blu-prod-1
+        container: grafana-prod-1
+    - Influx:
+        href: http://192.168.50.25:8086
+        description: influx-prod-1 on blu-server
+        icon: si-influxdb-#22ADF6
+        server: blu-prod-1
+        container: grafana-prod-1
 
 - IoT and Smarthome:
     - Home Assistant:
