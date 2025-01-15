@@ -3,13 +3,6 @@
     - Github:
         - abbr: GH
           href: https://github.com/rflpazini
-
-- Social:
-    - Reddit:
-        - abbr: RE
-          href: https://reddit.com/
-
-- Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+    - CloudFlare:
+        - abbr: CF
+          href: https://dash.cloudflare.com/8e21c51ad2be85f30ac65a6c6ce3024e/rfl.sh
