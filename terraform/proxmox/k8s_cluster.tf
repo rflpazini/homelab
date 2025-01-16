@@ -39,6 +39,10 @@ ${var.ssh_public_key}
   scsihw   = "virtio-scsi-single"
   bootdisk = "scsi0"
 
+  serial {
+    id = 0
+  }
+
   network {
     id = 0
     bridge = "vmbr0"
