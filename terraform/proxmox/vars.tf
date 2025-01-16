@@ -43,7 +43,6 @@ variable "vms" {
     name      = string
     pve_node  = string
     desc      = string
-    ip        = string
     memory    = number
     cores     = number
     disk_size = number
