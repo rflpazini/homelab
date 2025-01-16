@@ -5,6 +5,6 @@ iso_images_to_download:
   - filename: ubuntu-24.04-server-cloudimg-amd64.img
     url: https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-amd64.img
     is_cloud_init_image: true
-    cloud_init_vm_id: 9001
+    cloud_init_vm_id: 9002
     cloud_init_vm_instance_template_name: ubuntu-24.04-server-cloudimg-amd64
     enable_qemu_guest_agent: true
