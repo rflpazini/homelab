@@ -18,11 +18,11 @@ resource "proxmox_vm_qemu" "k8s" {
   clone      = var.cloud_init_template
   full_clone = true
 
-  cores  = each.value.cores
-  memory = each.value.memory
-  numa   = true
-  vcpus  = 0
-  cpu    = "host"
+  cores       = each.value.cores
+  memory      = each.value.memory
+  numa        = true
+  vcpus       = 0
+  cpu_type    = "host"
 
   # Define a static IP on the primary network interface
   ipconfig0 = "ip=${var.base_ip}${100 + each.key}/24,gw=${var.gateway_ip}"
