@@ -6,7 +6,7 @@ proxmox_api_token_secret = "e6b29cb1-9037-4d02-9feb-58669f352dea"
 
 vms = [
   {
-    name      = "k3s-control-1"
+    name      = "k3s-control"
     pve_node  = "prx-prd-1"
     desc      = "Kubernetes control plane node 1"
     memory    = 2048

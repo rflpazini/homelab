@@ -3,13 +3,13 @@
 # Create a new VM from a clone
 
 resource "proxmox_vm_qemu" "k8s" {
-  for_each = {
-    for idx, vm in var.vms : "${vm.name}-${idx + 1}" => vm
+  for_each = { 
+    for idx, vm in var.vms : idx + 1 => vm 
   }
 
   onboot = true
 
-  name  = each.key
+  name  = "${each.value.name}-${each.key}"
   desc  = each.value.desc
   target_node = each.value.pve_node
 
@@ -25,7 +25,7 @@ resource "proxmox_vm_qemu" "k8s" {
   cpu    = "host"
 
   # Define a static IP on the primary network interface
-  ipconfig0 = "ip=${var.base_ip}${100 + each.key[count.index]}/24,gw=${var.gateway_ip}"
+  ipconfig0 = "ip=${var.base_ip}${100 + each.key}/24,gw=${var.gateway_ip}"
 
 
   ciuser  = var.username
