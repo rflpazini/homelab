@@ -4,47 +4,47 @@
 
 resource "proxmox_vm_qemu" "k8s" {
   for_each = {
-    for vm in var.vms : vm.name => vm
+    for idx, vm in var.vms : "${vm.name}-${idx + 1}" => vm
   }
 
-  name = each.value.name
-  desc = each.value.desc
+  onboot = true
+
+  name  = each.key
+  desc  = each.value.desc
   target_node = each.value.pve_node
 
   # Setting the OS type to cloud-init
-  os_type = "cloud-init"
-  # Set to the name of the cloud-init VM template created earlier
+  os_type    = "cloud-init"
   clone      = var.cloud_init_template
-  # Ensure each VM is cloned in full to avoid
-  # dependency to the original VM template
   full_clone = true
-  boot        = "order=virtio0"
-  cores = each.value.cores
+
+  cores  = each.value.cores
   memory = each.value.memory
+  numa   = true
+  vcpus  = 0
+  cpu    = "host"
 
   # Define a static IP on the primary network interface
-  ipconfig0 = "ip=${each.value.ip}/24,gw=${var.gateway_ip}"
+  ipconfig0 = "ip=${var.base_ip}${100 + each.key[count.index]}/24,gw=${var.gateway_ip}"
 
-  ciuser = var.username
-  sshkeys = var.ssh_public_key
+
+  ciuser  = var.username
+  sshkeys = <<EOF
+${var.ssh_public_key}
+  EOF
 
   # Enable the QEMU guest agent
-  agent = 1
-  agent_timeout = 300 
+  agent = 0
+
+  scsihw   = "virtio-scsi-single"
+  bootdisk = "scsi0"
 
   disks {
-    virtio {
-      virtio0 {
+    scsi {
+      scsi0 {
         disk {
           storage = "local-lvm"
-          size    = "20G"
-        }
-      }
-      virtio1 {
-        disk {
-          storage = "local-lvm"
-          size    = "${each.value.disk_size}G"
-          format  = "raw"
+          size    = each.value.disk_size
         }
       }
     }
