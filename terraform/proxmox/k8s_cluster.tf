@@ -40,8 +40,9 @@ ${var.ssh_public_key}
   bootdisk = "scsi0"
 
   network {
-    model   = "virtio"
-    bridge  = "vmbr0"
+    id = 0
+    bridge = "vmbr0"
+    model  = "virtio"
   }
 
   disks {
@@ -50,6 +51,13 @@ ${var.ssh_public_key}
         disk {
           storage = "local-lvm"
           size    = each.value.disk_size
+        }
+      }
+    }
+    ide {
+      ide1 {
+        cloudinit {
+          storage = "local-lvm"
         }
       }
     }
