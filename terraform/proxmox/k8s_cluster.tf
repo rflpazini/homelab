@@ -13,7 +13,6 @@ resource "proxmox_vm_qemu" "k8s" {
   desc  = each.value.desc
   target_node = each.value.pve_node
 
-  # Setting the OS type to cloud-init
   os_type    = "cloud-init"
   clone      = var.cloud_init_template
   full_clone = true
