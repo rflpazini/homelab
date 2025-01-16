@@ -39,6 +39,11 @@ ${var.ssh_public_key}
   scsihw   = "virtio-scsi-single"
   bootdisk = "scsi0"
 
+  network {
+    model   = "virtio"
+    bridge  = "vmbr0"
+  }
+
   disks {
     scsi {
       scsi0 {
@@ -48,15 +53,5 @@ ${var.ssh_public_key}
         }
       }
     }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      target_node,
-      network,
-      clone,
-      full_clone,
-      qemu_os
-    ]
   }
 }
